@@ -1,0 +1,51 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
+    <id>dev.gabrielchl.intellij-pets</id>
+
+    <!-- Public plugin name should be written in Title Case.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
+    <name>Pets</name>
+
+    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+    <vendor email="gabriel@gabrielchl.dev" url="https://gabrielchl.dev">Gabriel Lee</vendor>
+
+    <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+         Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
+    <description><![CDATA[
+<p>Adds a cute pet to your favourite IDE.</p>
+
+<p>Inspired (very heavily) by <a href="https://github.com/tonybaloney/vscode-pets">vscode-pets</a> created by <a href="https://github.com/tonybaloney">Tony Baloney</a>.</p>
+
+<h2>How to use</h2>
+<ul>
+    <li>After installation, you'll find a pet icon on the right toolbar of your IDE, click on it to open the tool window</li>
+    <li>To change the pet variant, go to Preferences > Tools > Pets, and select a pet variant (see screenshot)</li>
+</ul>
+
+<h2>Credits</h2>
+<ul>
+    <li>Original idea from <a href="https://github.com/tonybaloney/vscode-pets">vscode-pets</a> created by <a href="https://github.com/tonybaloney">Tony Baloney</a></li>
+    <li>Cat 1 to 5 from <a href="https://seethingswarm.itch.io/catset">Catset</a> created by <a href="https://seethingswarm.itch.io/">SeethingSwarm</a> (note: the assets were purchased, must not be resold, see itch.io page for details)</li>
+</ul>
+  ]]></description>
+
+    <!-- Product and plugin compatibility requirements.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <!-- Extension points defined by the plugin.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+    <extensions defaultExtensionNs="com.intellij">
+        <toolWindow id="Pets" icon="Icons.WindowIcon" anchor="right" secondary="false"
+                    factoryClass="dev.gabrielchl.intellijpets.toolWindow.PetsToolWindowFactory"/>
+        <applicationService
+                serviceImplementation="dev.gabrielchl.intellijpets.settings.AppSettingsState"/>
+        <applicationConfigurable
+                parentId="tools"
+                instance="dev.gabrielchl.intellijpets.settings.AppSettingsConfigurable"
+                id="dev.gabrielchl.intellijpets.settings.AppSettingsConfigurable"
+                displayName="Pets"/>
+    </extensions>
+</idea-plugin>

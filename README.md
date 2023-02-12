@@ -4,6 +4,11 @@ Adds a cute pet to your favourite IDE.
 
 Inspired (very heavily) by [vscode-pets](https://github.com/tonybaloney/vscode-pets) created by [Tony Baloney](https://github.com/tonybaloney).
 
+## Features
+- A pet that walks around, sits, follows you, interacts with you, basically a fwend
+- Pet variants: 5 cats, bunny, chicken
+- Pet scale setting, to adjust the size of your pet
+
 ## How to use
 
 - After installation, you'll find a pet icon on the right toolbar of your IDE, click on it to open the tool window
@@ -12,9 +17,11 @@ Inspired (very heavily) by [vscode-pets](https://github.com/tonybaloney/vscode-p
 ## Credits
 
 - Original idea from [vscode-pets](https://github.com/tonybaloney/vscode-pets) created by [Tony Baloney](https://github.com/tonybaloney)
-- Cat 1 to 5 from [Catset](https://seethingswarm.itch.io/catset) created by [SeethingSwarm](https://seethingswarm.itch.io/) (note: the assets were purchased, must not be resold, see itch.io page for details)
+- All pet spritesheets created by [SeethingSwarm](https://seethingswarm.itch.io/) (note: the assets were purchased, must not be resold, see itch.io page for details)
 
 ## Screenshots
-![Demo](./screenshots/demo-1.png?raw=true "Demo")Demo
+Demo 1 ![Demo](./screenshots/demo-1.png?raw=true "Demo")
 
-![Settings](./screenshots/settings.png?raw=true "Settings")Settings
+Demo 2 ![Demo](./screenshots/demo-2.png?raw=true "Demo")
+
+Settings ![Settings](./screenshots/settings.png?raw=true "Settings")

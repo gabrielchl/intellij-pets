@@ -12,11 +12,13 @@ public class AppSettingsComponent {
 
     private final JPanel myMainPanel;
     private final ComboBox<String> petVariantComboBox = new ComboBox<>(new String[]{
+            "bunny",
             "cat-1",
             "cat-2",
             "cat-3",
             "cat-4",
-            "cat-5"
+            "cat-5",
+            "chicken",
     });
     private final ComboBox<Double> petScaleComboBox = new ComboBox<>(
             IntStream.rangeClosed(1, 15).mapToDouble(num -> (double)num * 2 / 10).boxed().toArray(Double[]::new)

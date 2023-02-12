@@ -18,6 +18,13 @@
 
 <p>Inspired (very heavily) by <a href="https://github.com/tonybaloney/vscode-pets">vscode-pets</a> created by <a href="https://github.com/tonybaloney">Tony Baloney</a>.</p>
 
+<h2>Features</h2>
+<ul>
+    <li>A pet that walks around, sits, follows you, interacts with you, basically a fwend</li>
+    <li>Pet variants: 5 cats, bunny, chicken</li>
+    <li>Pet scale setting, to adjust the size of your pet</li>
+</ul>
+
 <h2>How to use</h2>
 <ul>
     <li>After installation, you'll find a pet icon on the right toolbar of your IDE, click on it to open the tool window</li>
@@ -27,7 +34,7 @@
 <h2>Credits</h2>
 <ul>
     <li>Original idea from <a href="https://github.com/tonybaloney/vscode-pets">vscode-pets</a> created by <a href="https://github.com/tonybaloney">Tony Baloney</a></li>
-    <li>Cat 1 to 5 from <a href="https://seethingswarm.itch.io/catset">Catset</a> created by <a href="https://seethingswarm.itch.io/">SeethingSwarm</a> (note: the assets were purchased, must not be resold, see itch.io page for details)</li>
+    <li>All pet spritesheets created by <a href="https://seethingswarm.itch.io/">SeethingSwarm</a> (note: the assets were purchased, must not be resold, see itch.io page for details)</li>
 </ul>
   ]]></description>
 

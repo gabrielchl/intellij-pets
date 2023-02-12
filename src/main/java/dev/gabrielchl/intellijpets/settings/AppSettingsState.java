@@ -15,6 +15,7 @@ import org.jetbrains.annotations.Nullable;
 public class AppSettingsState implements PersistentStateComponent<AppSettingsState> {
     private Boolean settingsChanged = false;
     private String petVariant = "cat-1";
+    private Double petScale = 1d;
 
     public String getPetVariant() {
         return petVariant;
@@ -22,6 +23,15 @@ public class AppSettingsState implements PersistentStateComponent<AppSettingsSta
 
     public void setPetVariant(String petVariant) {
         this.petVariant = petVariant;
+        this.settingsChanged = true;
+    }
+
+    public Double getPetScale() {
+        return petScale;
+    }
+
+    public void setPetScale(Double petScale) {
+        this.petScale = petScale;
         this.settingsChanged = true;
     }
 

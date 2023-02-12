@@ -18,9 +18,10 @@ import java.util.Random;
 public class Pet {
     private static final int SPRITE_WIDTH_ORIGINAL = 40;
     private static final int SPRITE_HEIGHT_ORIGINAL = 40;
-    private static final float DISPLAY_SCALE = 1.6f;
-    private static final int SPRITE_WIDTH = Math.round(SPRITE_WIDTH_ORIGINAL * DISPLAY_SCALE);
-    private static final int SPRITE_HEIGHT = Math.round(SPRITE_HEIGHT_ORIGINAL * DISPLAY_SCALE);
+    private static final double DISPLAY_SCALE = 1.6;
+    private static final double SPRITE_WIDTH_BASE = Math.round(SPRITE_WIDTH_ORIGINAL * DISPLAY_SCALE);
+    private static final double SPRITE_HEIGHT_BASE = Math.round(SPRITE_HEIGHT_ORIGINAL * DISPLAY_SCALE);
+    private static final int SPEED_BASE = 7;
     private enum State {
         ATTACK,
         IDLE,
@@ -39,6 +40,9 @@ public class Pet {
     private int currentX;
     private int targetX;
     private final HashMap<State, ArrayList<Image>> sprites = new HashMap<>();
+    private final int SPRITE_WIDTH;
+    private final int SPRITE_HEIGHT;
+    private final int SPEED;
 
     public Pet(JPanel container, JPanel petInnerPanel, JLabel pet) {
         this.container = container;
@@ -51,6 +55,10 @@ public class Pet {
 
         AppSettingsState settings = AppSettingsState.getInstance().getState();
         String petVariant = settings == null ? "cat-1" : settings.getPetVariant();
+        double petScale = settings == null ? 1d : settings.getPetScale();
+        SPRITE_WIDTH = (int)Math.round(SPRITE_WIDTH_BASE * petScale);
+        SPRITE_HEIGHT = (int)Math.round(SPRITE_HEIGHT_BASE * petScale);
+        SPEED = (int)Math.round(SPEED_BASE * petScale);
 
         for (State state : State.values()) {
             Image spriteImg = Toolkit.getDefaultToolkit().createImage(getClass().getResource(String.format("/spritesheets/%s/%s.png", petVariant, state.toString().toLowerCase())));
@@ -144,8 +152,8 @@ public class Pet {
         boolean toRight = true;
         if (currentX != targetX) {
             int change = Math.abs(targetX - currentX);
-            if (change > 7) {
-                change = 7;
+            if (change > SPEED) {
+                change = SPEED;
             }
             if (targetX < currentX) {
                 change *= -1;

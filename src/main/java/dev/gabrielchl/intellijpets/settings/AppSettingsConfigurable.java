@@ -31,19 +31,24 @@ public class AppSettingsConfigurable implements Configurable {
     @Override
     public boolean isModified() {
         AppSettingsState settings = AppSettingsState.getInstance();
-        return !mySettingsComponent.getPetVariant().equals(settings.getPetVariant());
+        return (
+                !mySettingsComponent.getPetVariant().equals(settings.getPetVariant()) ||
+                        !mySettingsComponent.getPetScale().equals(settings.getPetScale())
+        );
     }
 
     @Override
     public void apply() {
         AppSettingsState settings = AppSettingsState.getInstance();
         settings.setPetVariant(mySettingsComponent.getPetVariant());
+        settings.setPetScale(mySettingsComponent.getPetScale());
     }
 
     @Override
     public void reset() {
         AppSettingsState settings = AppSettingsState.getInstance();
         mySettingsComponent.setPetVariant(settings.getPetVariant());
+        mySettingsComponent.setPetScale(settings.getPetScale());
     }
 
     @Override

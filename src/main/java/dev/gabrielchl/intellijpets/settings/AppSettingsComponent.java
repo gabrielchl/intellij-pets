@@ -6,6 +6,7 @@ import com.intellij.util.ui.FormBuilder;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
+import java.util.stream.IntStream;
 
 public class AppSettingsComponent {
 
@@ -17,10 +18,14 @@ public class AppSettingsComponent {
             "cat-4",
             "cat-5"
     });
+    private final ComboBox<Double> petScaleComboBox = new ComboBox<>(
+            IntStream.rangeClosed(1, 15).mapToDouble(num -> (double)num * 2 / 10).boxed().toArray(Double[]::new)
+    );
 
     public AppSettingsComponent() {
         myMainPanel = FormBuilder.createFormBuilder()
                 .addLabeledComponent(new JBLabel("Pet variant: "), petVariantComboBox, 1, false)
+                .addLabeledComponent(new JBLabel("Pet scale: "), petScaleComboBox, 1, false)
                 .addComponentFillVertically(new JPanel(), 0)
                 .getPanel();
     }
@@ -40,6 +45,15 @@ public class AppSettingsComponent {
 
     public void setPetVariant(@NotNull String newVariant) {
         petVariantComboBox.setItem(newVariant);
+    }
+
+    @NotNull
+    public Double getPetScale() {
+        return petScaleComboBox.getItem();
+    }
+
+    public void setPetScale(@NotNull Double newScale) {
+        petScaleComboBox.setItem(newScale);
     }
 
 }

@@ -2,7 +2,7 @@
 
 Adds a cute pet to your favourite IDE.
 
-Inspired (very heavily) by [vscode-pets](https://github.com/tonybaloney/vscode-pets) created by [Tony Baloney](https://github.com/tonybaloney).
+Inspired (very heavily) by [vscode-pets](https://github.com/tonybaloney/vscode-pets) created by [Anthony Shaw](https://github.com/tonybaloney).
 
 ## Features
 - A pet that walks around, sits, follows you, interacts with you, basically a fwend
@@ -16,7 +16,7 @@ Inspired (very heavily) by [vscode-pets](https://github.com/tonybaloney/vscode-p
 
 ## Credits
 
-- Original idea from [vscode-pets](https://github.com/tonybaloney/vscode-pets) created by [Tony Baloney](https://github.com/tonybaloney)
+- Original idea from [vscode-pets](https://github.com/tonybaloney/vscode-pets) created by [Anthony Shaw](https://github.com/tonybaloney)
 - All pet spritesheets created by [SeethingSwarm](https://seethingswarm.itch.io/) (note: the assets were purchased, must not be resold, see itch.io page for details)
 
 ## Screenshots

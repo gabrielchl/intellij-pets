@@ -16,7 +16,7 @@
     <description><![CDATA[
 <p>Adds a cute pet to your favourite IDE.</p>
 
-<p>Inspired (very heavily) by <a href="https://github.com/tonybaloney/vscode-pets">vscode-pets</a> created by <a href="https://github.com/tonybaloney">Tony Baloney</a>.</p>
+<p>Inspired (very heavily) by <a href="https://github.com/tonybaloney/vscode-pets">vscode-pets</a> created by <a href="https://github.com/tonybaloney">Anthony Shaw</a>.</p>
 
 <h2>Features</h2>
 <ul>
@@ -33,7 +33,7 @@
 
 <h2>Credits</h2>
 <ul>
-    <li>Original idea from <a href="https://github.com/tonybaloney/vscode-pets">vscode-pets</a> created by <a href="https://github.com/tonybaloney">Tony Baloney</a></li>
+    <li>Original idea from <a href="https://github.com/tonybaloney/vscode-pets">vscode-pets</a> created by <a href="https://github.com/tonybaloney">Anthony Shaw</a></li>
     <li>All pet spritesheets created by <a href="https://seethingswarm.itch.io/">SeethingSwarm</a> (note: the assets were purchased, must not be resold, see itch.io page for details)</li>
 </ul>
   ]]></description>

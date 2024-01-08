@@ -20,6 +20,8 @@ Inspired (very heavily) by [vscode-pets](https://github.com/tonybaloney/vscode-p
 - All pet spritesheets created by [SeethingSwarm](https://seethingswarm.itch.io/) (note: the assets were purchased, must not be resold, see itch.io page for details)
 
 ## Screenshots
+Collection ![Collection](./screenshots/collection.png?raw=true "Collection")
+
 Demo 1 ![Demo](./screenshots/demo-1.png?raw=true "Demo")
 
 Demo 2 ![Demo](./screenshots/demo-2.png?raw=true "Demo")

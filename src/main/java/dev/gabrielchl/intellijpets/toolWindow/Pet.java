@@ -16,12 +16,6 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class Pet {
-    private static final int SPRITE_WIDTH_ORIGINAL = 40;
-    private static final int SPRITE_HEIGHT_ORIGINAL = 40;
-    private static final double DISPLAY_SCALE = 1.6;
-    private static final double SPRITE_WIDTH_BASE = Math.round(SPRITE_WIDTH_ORIGINAL * DISPLAY_SCALE);
-    private static final double SPRITE_HEIGHT_BASE = Math.round(SPRITE_HEIGHT_ORIGINAL * DISPLAY_SCALE);
-    private static final int SPEED_BASE = 7;
     private enum State {
         ATTACK,
         IDLE,
@@ -55,10 +49,17 @@ public class Pet {
 
         AppSettingsState settings = AppSettingsState.getInstance().getState();
         String petVariant = settings == null ? "cat-1" : settings.getPetVariant();
+
+        int spriteSize = Utils.petToSpriteSize.get(petVariant);
+        double display_scale = 1.6;
+        double spriteWidthBase = Math.round(spriteSize * display_scale);
+        double spriteHeightBase = Math.round(spriteSize * display_scale);
+        double speed_base = 7d / 40 * spriteSize;
+
         double petScale = settings == null ? 1d : settings.getPetScale();
-        SPRITE_WIDTH = (int)Math.round(SPRITE_WIDTH_BASE * petScale);
-        SPRITE_HEIGHT = (int)Math.round(SPRITE_HEIGHT_BASE * petScale);
-        SPEED = (int)Math.round(SPEED_BASE * petScale);
+        SPRITE_WIDTH = (int)Math.round(spriteWidthBase * petScale);
+        SPRITE_HEIGHT = (int)Math.round(spriteHeightBase * petScale);
+        SPEED = (int)Math.round(speed_base * petScale);
 
         for (State state : State.values()) {
             Image spriteImg = Toolkit.getDefaultToolkit().createImage(getClass().getResource(String.format("/spritesheets/%s/%s.png", petVariant, state.toString().toLowerCase())));
@@ -66,11 +67,11 @@ public class Pet {
             ImageProducer catSource = spriteImg.getSource();
 
             ArrayList<Image> spriteRow = new ArrayList<>();
-            for (int x = 0; x < spriteImg.getWidth(null) / SPRITE_HEIGHT_ORIGINAL; x += 1) {
+            for (int x = 0; x < spriteImg.getWidth(null) / spriteSize; x += 1) {
                 Image img = Toolkit.getDefaultToolkit().createImage(
                         new FilteredImageSource(
                                 catSource,
-                                new CropImageFilter(SPRITE_WIDTH_ORIGINAL * x, 0, SPRITE_WIDTH_ORIGINAL, SPRITE_HEIGHT_ORIGINAL)
+                                new CropImageFilter(spriteSize * x, 0, spriteSize, spriteSize)
                         )
                 ).getScaledInstance(SPRITE_WIDTH, SPRITE_HEIGHT, Image.SCALE_DEFAULT);
                 Utils.waitForImageToLoad(img);

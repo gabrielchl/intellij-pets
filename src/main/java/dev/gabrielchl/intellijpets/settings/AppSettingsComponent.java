@@ -25,7 +25,8 @@ public class AppSettingsComponent {
             "dog-3",
             "dog-4",
             "dog-5",
-            "hedgehog"
+            "hedgehog",
+            "trill",
     });
     private final ComboBox<Double> petScaleComboBox = new ComboBox<>(
             IntStream.rangeClosed(1, 15).mapToDouble(num -> (double)num * 2 / 10).boxed().toArray(Double[]::new)

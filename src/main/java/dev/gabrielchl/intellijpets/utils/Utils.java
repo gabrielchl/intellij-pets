@@ -22,7 +22,8 @@ public class Utils {
             Map.entry("dog-3", 32),
             Map.entry("dog-4", 32),
             Map.entry("dog-5", 32),
-            Map.entry("hedgehog", 32)
+            Map.entry("hedgehog", 32),
+            Map.entry("trill", 40)
     );
 
     public static BufferedImage toBufferedImage(Image img) {

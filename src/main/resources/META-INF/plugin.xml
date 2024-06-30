@@ -1,19 +1,19 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-    <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
-    <id>dev.gabrielchl.intellij-pets</id>
+  <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
+  <id>dev.gabrielchl.intellij-pets</id>
 
-    <!-- Public plugin name should be written in Title Case.
-         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
-    <name>Pets</name>
+  <!-- Public plugin name should be written in Title Case.
+       Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
+  <name>Pets</name>
 
-    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
-    <vendor email="gabriel@gabrielchl.dev" url="https://gabrielchl.dev">Gabriel Lee</vendor>
+  <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+  <vendor email="gabriel@gabrielchl.dev" url="https://gabrielchl.dev">Gabriel Lee</vendor>
 
-    <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
-         Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
-         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
-    <description><![CDATA[
+  <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+       Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
+       Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
+  <description><![CDATA[
 <p>Adds a cute pet to your favourite IDE.</p>
 
 <p>Inspired (very heavily) by <a href="https://github.com/tonybaloney/vscode-pets">vscode-pets</a> created by <a href="https://github.com/tonybaloney">Anthony Shaw</a>.</p>
@@ -21,7 +21,7 @@
 <h2>Features</h2>
 <ul>
     <li>A pet that walks around, sits, follows you, interacts with you, basically a fwend</li>
-    <li>Pet variants: 5 cats, bunny, chicken, axolotl, hedgehog, 5 dogs</li>
+    <li>Pet variants: 5 cats, bunny, chicken, axolotl, hedgehog, 5 dogs, etc.</li>
     <li>Pet scale setting, to adjust the size of your pet</li>
 </ul>
 
@@ -38,21 +38,27 @@
 </ul>
   ]]></description>
 
-    <!-- Product and plugin compatibility requirements.
-         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
-    <depends>com.intellij.modules.platform</depends>
+  <!-- Product and plugin compatibility requirements.
+       Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+  <depends>com.intellij.modules.platform</depends>
 
-    <!-- Extension points defined by the plugin.
-         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
-    <extensions defaultExtensionNs="com.intellij">
-        <toolWindow id="Pets" icon="Icons.WindowIcon" anchor="right" secondary="false"
-                    factoryClass="dev.gabrielchl.intellijpets.toolWindow.PetsToolWindowFactory"/>
-        <applicationService
-                serviceImplementation="dev.gabrielchl.intellijpets.settings.AppSettingsState"/>
-        <applicationConfigurable
-                parentId="tools"
-                instance="dev.gabrielchl.intellijpets.settings.AppSettingsConfigurable"
-                id="dev.gabrielchl.intellijpets.settings.AppSettingsConfigurable"
-                displayName="Pets"/>
-    </extensions>
+  <!-- Extension points defined by the plugin.
+       Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+  <extensions defaultExtensionNs="com.intellij">
+    <applicationService
+            serviceImplementation="dev.gabrielchl.intellijPets.settings.PetsSettings"/>
+    <applicationConfigurable
+            parentId="tools"
+            instance="dev.gabrielchl.intellijPets.settings.PetsSettingsConfigurable"
+            id="dev.gabrielchl.intellijPets.settings.PetsSettingsConfigurable"
+            displayName="Pets"/>
+    <toolWindow id="Pets" factoryClass="dev.gabrielchl.intellijPets.toolWindow.PetsToolWindowFactory" icon="dev.gabrielchl.intellijPets.icons.PetsIcons.ToolWindowIcon" anchor="right" secondary="false" />
+  </extensions>
+
+  <actions>
+    <group id="Pets.Actions">
+      <action id="Pets.AddPet" class="dev.gabrielchl.intellijPets.actions.AddPetAction" text="Add Pet" icon="AllIcons.General.Add" />
+      <action id="Pets.RemovePet" class="dev.gabrielchl.intellijPets.actions.RemovePetAction" text="Remove Pet" icon="AllIcons.General.Remove" />
+    </group>
+  </actions>
 </idea-plugin>

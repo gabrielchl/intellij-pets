@@ -5,6 +5,7 @@ import dev.gabrielchl.intellijPets.utils.Constants
 import dev.gabrielchl.intellijPets.utils.Utilities
 import java.awt.Image
 import java.awt.Toolkit
+import java.awt.event.MouseEvent
 import java.awt.geom.AffineTransform
 import java.awt.image.AffineTransformOp
 import java.awt.image.BufferedImage
@@ -13,6 +14,7 @@ import java.awt.image.FilteredImageSource
 import java.util.*
 import javax.swing.JPanel
 import kotlin.math.abs
+import kotlin.math.max
 
 // TODO: rewrite all this to allow more pet-specific behaviours
 class Pet(val variant: String, val container: JPanel) {
@@ -80,31 +82,25 @@ class Pet(val variant: String, val container: JPanel) {
             sprites[state] = spriteRow
         }
         image = sprites[state]!![xIndex]
+    }
 
-        // TODO: redo this clicking stuff
-//        container.addMouseListener(object : MouseAdapter() {
-//            override fun mouseClicked(e: MouseEvent) {
-//                super.mouseClicked(e)
-//                if (state == Pet.State.SIT) {
-//                    xIndex = 0
-//                    state = if (Math.round(Math.random().toFloat()) == 0) Pet.State.JUMP else Pet.State.ATTACK
-//                }
-//            }
-//        })
-//        container.addMouseMotionListener(object : MouseMotionAdapter() {
-//            override fun mouseMoved(e: MouseEvent) {
-//                super.mouseMoved(e)
-//                if (abs((e.x - (currentX + (SPRITE_WIDTH / 2))).toDouble()) > 30) {
-//                    targetX = max(0.0, (e.x - (SPRITE_WIDTH / 2)).toDouble()).toInt()
-//                }
-//            }
-//        })
-//        container.addMouseListener(object : MouseAdapter() {
-//            override fun mouseExited(e: MouseEvent) {
-//                super.mouseExited(e)
-//                targetX = currentX
-//            }
-//        })
+    fun onMouseClicked(e: MouseEvent) {
+        if (state == Pet.State.SIT) {
+            xIndex = 0
+            state = if (Math.round(Math.random().toFloat()) == 0) Pet.State.JUMP else Pet.State.ATTACK
+        }
+    }
+
+    fun onMouseMoved(e: MouseEvent) {
+        if (abs((e.x - (currentX + (SPRITE_WIDTH / 2))).toDouble()) > 30) {
+            targetX = max(0.0, (e.x - (SPRITE_WIDTH / 2)).toDouble()).toInt()
+        }
+    }
+
+    fun onMouseExited(e: MouseEvent) {
+        if (state == Pet.State.SIT) {
+            targetX = currentX
+        }
     }
 
     fun tick() {

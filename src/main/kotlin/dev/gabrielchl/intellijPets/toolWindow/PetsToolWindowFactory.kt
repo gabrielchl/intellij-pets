@@ -11,6 +11,9 @@ import dev.gabrielchl.intellijPets.settings.PetsSettings
 import dev.gabrielchl.intellijPets.utils.Constants
 import java.awt.BorderLayout
 import java.awt.Graphics
+import java.awt.event.MouseAdapter
+import java.awt.event.MouseEvent
+import java.awt.event.MouseMotionAdapter
 import java.util.ArrayList
 import java.util.Timer
 import javax.swing.JPanel
@@ -18,12 +21,12 @@ import kotlin.concurrent.timerTask
 
 class PetsToolWindowFactory : ToolWindowFactory, DumbAware {
     override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
-        val toolWindowContent = PetsToolWindowContent(toolWindow)
+        val toolWindowContent = PetsToolWindowContent()
         val content = ContentFactory.getInstance().createContent(toolWindowContent.contentContainerPanel, "", false)
         toolWindow.contentManager.addContent(content)
     }
 
-    class PetsToolWindowContent(toolWindow: ToolWindow) {
+    class PetsToolWindowContent {
         var contentContainerPanel = JPanel(BorderLayout())
         var contentPanel = PetsToolWindowContentPanel()
 
@@ -56,6 +59,34 @@ class PetsToolWindowFactory : ToolWindowFactory, DumbAware {
                 }
                 repaint()
             }, 150, 150)
+
+            this.addMouseListener(object: MouseAdapter() {
+                override fun mouseClicked(e: MouseEvent) {
+                    super.mouseClicked(e)
+                    if (pets.isEmpty()) {
+                        return
+                    }
+                    pets.last().onMouseClicked(e)
+                }
+            })
+            this.addMouseMotionListener(object : MouseMotionAdapter() {
+                override fun mouseMoved(e: MouseEvent) {
+                    super.mouseMoved(e)
+                    if (pets.isEmpty()) {
+                        return
+                    }
+                    pets.last().onMouseMoved(e)
+                }
+            })
+            this.addMouseListener(object : MouseAdapter() {
+                override fun mouseExited(e: MouseEvent) {
+                    super.mouseExited(e)
+                    if (pets.isEmpty()) {
+                        return
+                    }
+                    pets.last().onMouseExited(e)
+                }
+            })
         }
 
         override fun paintComponent(g: Graphics) {

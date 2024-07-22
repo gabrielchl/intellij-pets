@@ -2,19 +2,17 @@ package dev.gabrielchl.intellijPets.toolWindow
 
 import dev.gabrielchl.intellijPets.settings.PetsSettings
 import dev.gabrielchl.intellijPets.utils.Constants
-import dev.gabrielchl.intellijPets.utils.Utilities
 import java.awt.Image
-import java.awt.Toolkit
 import java.awt.event.MouseEvent
 import java.awt.geom.AffineTransform
 import java.awt.image.AffineTransformOp
 import java.awt.image.BufferedImage
-import java.awt.image.CropImageFilter
-import java.awt.image.FilteredImageSource
 import java.util.*
+import javax.imageio.ImageIO
 import javax.swing.JPanel
 import kotlin.math.abs
 import kotlin.math.max
+
 
 // TODO: rewrite all this to allow more pet-specific behaviours
 class Pet(val variant: String, val container: JPanel) {
@@ -32,7 +30,7 @@ class Pet(val variant: String, val container: JPanel) {
     private var state: State
     var currentX = Random().nextInt(300)
     private var targetX = currentX
-    private val sprites: HashMap<State, ArrayList<Image>> = HashMap<State, ArrayList<Image>>()
+    private val sprites: HashMap<State, ArrayList<BufferedImage>> = HashMap<State, ArrayList<BufferedImage>>()
     val SPRITE_WIDTH: Int
     val SPRITE_HEIGHT: Int
     private val SPEED: Int
@@ -54,7 +52,7 @@ class Pet(val variant: String, val container: JPanel) {
         SPEED = Math.round(speedBase * settings.petScale).toInt()
 
         for (state in State.values()) {
-            val spriteImg = Toolkit.getDefaultToolkit().createImage(
+            val spriteImg = ImageIO.read(
                 javaClass.getResource(
                     String.format(
                         "/spritesheets/%s/%s.png", variant, state.toString().lowercase(
@@ -63,20 +61,12 @@ class Pet(val variant: String, val container: JPanel) {
                     )
                 )
             )
-            Utilities.waitForImageToLoad(spriteImg)
-            val catSource = spriteImg.source
 
-            val spriteRow = ArrayList<Image>()
+            val spriteRow = ArrayList<BufferedImage>()
             var x = 0
             while (x < spriteImg.getWidth(null) / spriteSize) {
-                val img = Toolkit.getDefaultToolkit().createImage(
-                    FilteredImageSource(
-                        catSource,
-                        CropImageFilter(spriteSize * x, 0, spriteSize, spriteSize)
-                    )
-                ).getScaledInstance(SPRITE_WIDTH, SPRITE_HEIGHT, Image.SCALE_DEFAULT)
-                Utilities.waitForImageToLoad(img)
-                spriteRow.add(img)
+                val croppedImg = spriteImg.getSubimage(spriteSize * x, 0, spriteSize, spriteSize)
+                spriteRow.add(croppedImg)
                 x += 1
             }
             sprites[state] = spriteRow
@@ -84,7 +74,7 @@ class Pet(val variant: String, val container: JPanel) {
         image = sprites[state]!![xIndex]
     }
 
-    fun onMouseClicked(e: MouseEvent) {
+    fun onMouseClicked(@Suppress("UNUSED_PARAMETER") e: MouseEvent) {
         if (state == Pet.State.SIT) {
             xIndex = 0
             state = if (Math.round(Math.random().toFloat()) == 0) Pet.State.JUMP else Pet.State.ATTACK
@@ -97,7 +87,7 @@ class Pet(val variant: String, val container: JPanel) {
         }
     }
 
-    fun onMouseExited(e: MouseEvent) {
+    fun onMouseExited(@Suppress("UNUSED_PARAMETER") e: MouseEvent) {
         if (state == Pet.State.SIT) {
             targetX = currentX
         }
@@ -159,11 +149,10 @@ class Pet(val variant: String, val container: JPanel) {
         }
         val catImg = sprites[state]!![xIndex]
         if (!toRight) {
-            val originalImage: BufferedImage = Utilities.toBufferedImage(catImg)
             val tx = AffineTransform.getScaleInstance(-1.0, 1.0)
-            tx.translate(-originalImage.getWidth(null).toDouble(), 0.0)
+            tx.translate(-catImg.getWidth(null).toDouble(), 0.0)
             val op = AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR)
-            val flippedImage = op.filter(originalImage, null)
+            val flippedImage = op.filter(catImg, null)
             image = flippedImage.getScaledInstance(SPRITE_WIDTH, SPRITE_HEIGHT, Image.SCALE_DEFAULT)
         } else {
             image = catImg
